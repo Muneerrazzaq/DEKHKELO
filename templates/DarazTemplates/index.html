@@ -1,0 +1,151 @@
+
+{% extends 'DarazTemplates/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div data-vide-bg="{% static 'DarazData/video/video' %}">
+        <div class="container">
+            <div class="banner-info">
+                <h3>DEKH KE LO! </h3>
+                <h2>Search Product Here</h2><br>	
+                <div class="search-form">
+                    <form action="new_index" method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Search..." name="SearchItem">
+                        <input type="submit" value=" " >
+                    </form>
+                </div>		
+            </div>	
+        </div>
+    </div>
+    
+        <script>window.jQuery || document.write('<script src='{% static 'DarazData/js/jquery-1.11.1.min.js' %}'></script>')</script>
+        <script src="{% static 'DarazData/js/jquery.vide.min.js' %}"></script>
+    
+    <!--content-->
+    
+    
+    
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+             <a href="categories"> <img class="first-slide" src="{% static 'DarazData/images/daraz_slide1.jpg' %}" alt="First slide" style="width:100%;"></a>
+           
+            </div>
+            <div class="item">
+             <a href="products"> <img class="second-slide " src="{% static 'DarazData/images/daraz_slide2.jpg' %}" alt="Second slide" style="width:100%;"></a>
+             
+            </div>
+            <div class="item">
+              <a href="hold"><img class="third-slide " src="{% static 'DarazData/images/daraz_slide3.jpg' %}" alt="Third slide" style="width:100%;"></a>
+              
+            </div>
+          </div>
+        
+        </div><!-- /.carousel -->
+    
+    <!--content-->
+        <div class="product">
+            <div class="container">
+                <div class="spec ">
+                    <h3>Search Categories</h3>
+                    <div class="ser-t">
+                        <b></b>
+                        <span><i></i></span>
+                        <b class="line"></b>
+                    </div>
+                </div>
+                    <div class=" con-w3l">
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Electronic Devices"><img src="{% static 'DarazData/images/electronic devices.jpg' %}" class="img-responsive" alt=""></a>
+                                        <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Electronic Devices" class="categorysetting">Electronic Devices</a></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Babies"><img src="{% static 'DarazData/images/babies and toys.jpg' %}" class="img-responsive" alt=""></a>
+                                        <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Babies" class="categorysetting">Babies &amp Toys</a></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Groceries"><img src="{% static 'DarazData/images/grocesry.jpg' %}" class="img-responsive" alt=""></a>
+                                        <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Groceries" class="categorysetting"> Groceries &amp; Pets</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Home"><img src="{% static 'DarazData/images/home and lifestyle.jpg' %}" class="img-responsive" alt=""></a>
+                                        <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Home" class="categorysetting">Home & Life Style</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Men's Fashion"><img src="{% static 'DarazData/images/men fashion.jpg' %}" class="img-responsive" alt=""></a>
+                                        <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Men's Fashion" class="categorysetting">Men Fashion</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Women's Fashion"><img src="{% static 'DarazData/images/woman fashion.jpg' %}" class="img-responsive" alt=""></a>
+                                       <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Women's Fashion" class="categorysetting">Woman Fashion</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=TV"><img src="{% static 'DarazData/images/tv and home appliances.jpg' %}" class="img-responsive" alt=""></a>
+                                       <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=TV" class="categorysetting">TV &amp Home Appliances</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 pro-1">
+                                    <div class="col-m">
+                                        <a href="new_index?search=Sports"> <img src="{% static 'DarazData/images/sports.jpg' %}" class="img-responsive" alt=""></a>
+                                         <div class="mid-1 newmid">
+                                            <div class="women">
+                                                <h6><a href="new_index?search=Sports" class="categorysetting">Sports &amp; OutDoor</a></h6>							
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                             </div>
+
+            </div>
+        </div>
+   {% endblock %}

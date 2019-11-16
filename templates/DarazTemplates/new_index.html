@@ -1,0 +1,265 @@
+
+{% extends 'DarazTemplates/base.html' %}
+{% load static %}
+{% block content %}
+    
+    <!--content-->
+        <div class="product">
+            <div class="container">
+                <div class="spec ">
+                    <h3>Search Result</h3>
+                    <div class="ser-t">
+                        <b></b>
+                        <span><i></i></span>
+                        <b class="line"></b>
+                    </div>
+                    <br><br>
+                    {% if keyword|length > 1 %}
+                    
+                    <b><span>"{{ length }}" items found for "{{ keyword }}"</span></b>
+                    {% else %}
+                    <strong><span>Nothing Search Hence No Result</span></strong>
+                    {% endif %}
+                </div>   
+                <div class="">
+                    {% for i in data %}
+                        <div class=" con-w3l">
+                            <div class="col-md-3 pro-1">
+                                <div class="col-m" style="max-width: 100%; height:430px;">
+                                    <img src="{{i.4}}" class="img-responsive" style="width:170px;height:160px;">
+                                    <div class="mid-1">
+                                        <div class="women">
+                                        
+                                            <p style="height: 40px; overflow: hidden">
+                                                <a href="{{i.5}}" data-toggle="tooltip" title="{{ i.3 }}">
+                                                    {{ i.3 }} <!-- this is the name of product -->
+                                                </a>
+                                            </p>
+                                            <br><br>
+                                            <p class="price">
+                                                Rs. {{ i.6 }} <!-- this is the price of product -->
+                                            </p>
+                                            {% if i.7 != 0 %} <!-- this is to show only products that have discouts of product -->
+                                                <p>
+                                                    <span style="text-decoration: line-through; color:gray; font-weight: 600;">
+                                                        {{ i.7 }}
+                                                    </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="text-decoration:double; color:red;font-weight: 700;font-size:20px;">
+                                                        {{ i.8 }}
+                                                    </span>
+                                                </p>
+                                            {% else %}
+                                                <p>
+                                                    <span style="text-decoration: line-through; color:gray; font-weight: 600;"> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="text-decoration:double; color:red;font-weight: 700;font-size:20px;"></span>
+                                                </p>
+
+                                            {% endif %}
+                                            <p> <!-- this is to show rating of products in stars form of product -->
+                                                {% for j in '01234'|make_list %}
+                                                    {% if i.9 >= forloop.counter  %}
+                                                        <span class="fa fa-star checked"></span>
+                                                    {% else %}
+                                                        <span class="fa fa-star unchecked"></span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                        &nbsp;
+                                                <span>
+                                                    ({{ i.10}}) <!-- product reviews -->
+                                                </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;
+                                                <span>
+                                                    {{ i.11}}<!-- product location data-whatever="{{i.13}}"-->
+                                                </span>
+
+                                                <br>
+                                                <a style="padding: 10px; text-align: center;" href="#" data-toggle="modal" data-target="#myModal" data-whatever="{{i.0}},{{i.1}},{{i.2}},{{i.3}},{{i.4}},{{i.5}},{{i.6}},{{i.7}},{{i.8}},{{i.9}},{{i.10}},{{i.11}},{{i.12}},{{i.13}},{{i.15}},{{i.14}},{{i.16}}"  class="offer-img">
+                                                    {% if i.12 == "New Item"  %}
+                                                        <button type="button" class="btn btn-warning" style="width: 70%;">
+                                                            <span>
+                                                                {{ i.12}}
+                                                            </span>
+                                                        </button>
+                                                    {% elif i.12 == "No Change" %}
+                                                        <button type="button" class="btn btn-secondary" style="width: 70%;">
+                                                            <span>
+                                                                {{ i.12}}
+                                                            </span>
+                                                        </button>
+                                                    {% elif i.12 == "Price Increase" %}
+                                                        <button type="button" class="btn btn-danger" style="width: 70%;">
+                                                            <span>
+                                                                {{ i.12}}
+                                                            </span>
+                                                        </button>
+                                                    {% else %}
+                                                    <button type="button" class="btn btn-success" style="width: 70%;">
+                                                        <span>
+                                                            {{ i.12}}
+                                                        </span>
+                                                    </button>
+                                                    {% endif %}
+                                                </a> <!-- product comparison -->
+                                            </p>
+                                        </div>
+                                    </div>
+
+                            <script>
+                                $('#myModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget); // Button that triggered the modal
+                                    var product = button.data('whatever');
+                                    var modal = $(this);
+                                    modal.find("#header").find('.category').text(product.split(",")[0]);
+                                    modal.find("#header").find('.category').append(" > "+product.split(",")[1]);
+                                    modal.find("#header").find('.category').append(" > "+product.split(",")[2]);
+                                    modal.find("#header").find('.name').text(product.split(",")[3]);
+                                    modal.find('#img').attr("src", product.split(",")[4]);
+                                    modal.find('span#comparison').text("Sale Detection :  "+product.split(",")[12]);
+                                    modal.find('.price').text("Rs. "+product.split(",")[6]);
+                                    modal.find('.button').attr("href",product.split(",")[5]);
+                                    modal.find('.instock').text("Avilable in  stock : "+product.split(",")[14]);
+                                    modal.find('.review').text("No of Reviews : "+product.split(",")[10]);
+                                    modal.find('.location').text("Location : "+product.split(",")[11]);
+
+                                if (product.split(",")[7] == 0.0){
+                                    modal.find('.discount').text("0%")
+                                    modal.find('.beforeprice').text("Rs. "+product.split(",")[6])
+                                }
+                                else{
+                                    modal.find('.discount').text(product.split(",")[8])
+                                    modal.find('.beforeprice').text("Rs. "+product.split(",")[7])
+                                }
+                                
+                                if (product.split(",")[12] == "New Item"){ //13 price 14 index
+                                    modal.find('.oldprice').text("NA")
+                                    modal.find('.olddiscount').text("NA")
+                                    modal.find('.oldbeforeprice').text("NA")
+                                }
+                                else{
+                                    modal.find('.oldprice').text("Rs. " +parseInt(product.split(",")[13]))
+                                    if (parseInt(product.split(",")[15]) != 0 ){
+                                        modal.find('.olddiscount').text(parseInt(product.split(",")[15])+"%")
+                                        modal.find('.oldbeforeprice').text("Rs. " +product.split(",")[16])
+                                    }
+                                    else{
+                                        modal.find('.olddiscount').text("0%")
+                                        modal.find('.oldbeforeprice').text("Rs. " +parseInt(product.split(",")[13]))
+                                    }
+                                }
+                              })
+                            </script>
+
+
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content modal-info">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body modal-spa">
+                                            <div class="col-md-5 span-2">
+                                                <div class="item">
+                                                    <img src="" id="img" class="img-responsive" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 span-1 " id="header">
+                                                <h6 class="category"></h6>
+                                                <div class="mid-2"></div>
+                                                <h3 class="name"></h3><br>
+                                                <div class="price_single">
+                                                    <h4 style="color:gray;font-weight:600;">
+                                                        Sale Detection & Predction
+                                                    </h4><br>
+                                                    <table class="table table-hover" style="border:none;">
+                                                        <thead style="background-color: #ffa500c7;color: white;">
+                                                            <tr>
+                                                                <th></th>
+                                                                <th style="color: white !important;">Current Price</th>
+                                                                <th style="color: white !important;">Previous Price</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                              <th>Price</th>
+                                                              <td class="beforeprice"></td>
+                                                              <td class="oldbeforeprice"></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <th>Discount</th>
+                                                              <td class="discount"></td>
+                                                              <td class="olddiscount"></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <th>Discounted Price</th>
+                                                              <td class="price"></td>
+                                                              <td class="oldprice"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                     </table>
+                                                    <br>
+                                                     <span id="comparison" style="color:red;font-weight:600;font-size:16px;"></span><br><br>
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <p class="quick">
+                                                    <span class="review"></span><br>
+                                                    <span class="instock"></span><br>
+                                                    <span class="location"></span><br><br>
+                                                </p>
+                                                <div class="add-to">
+                                                    <a href="#" class="button">
+                                                        <button class="btn btn-danger my-cart-btn my-cart-btn1 ">
+                                                            Check On Daraz!
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <style>
+                    
+                </style>
+                    <div class="pagination">
+
+                        {% if data.has_previous %}
+                          <a class="pagination-action" href="?search={{keyword}}&page=1">
+                           <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                          </a>
+                          <a class="pagination-action" href="?search={{keyword}}&page={{ data.previous_page_number }}">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                          </a>
+                        {% endif %}
+                      
+                        {% for num in data.paginator.page_range %}
+                      
+                          {% if data.number == num %}
+                          <span class="pagination-number pagination-current">{{ num }}</span>
+                          {% elif num > data.number|add:'-3' and num < data.number|add:'3' %}
+                          <a class="pagination-number" href="?search={{keyword}}&page={{ num }}">{{ num }}</a>
+                          {% endif %}
+                      
+                        {% endfor %}
+                      
+                        {% if data.has_next %}
+                          <a class="pagination-action" href="?search={{keyword}}&page={{ data.next_page_number }}">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                          </a>
+                          <a class="pagination-action" href="?search={{keyword}}&page={{ data.paginator.num_pages }}">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                          </a>
+                        {% endif %}
+                      
+                      </div>
+                </div>
+            </div>
+        </div>
+   {% endblock %}
